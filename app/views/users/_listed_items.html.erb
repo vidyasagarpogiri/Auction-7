@@ -1,0 +1,26 @@
+<div id="listed-items">
+  <h1>
+    <% if current_user.id == @user.id %>
+      Your current
+    <% else %>
+      <%= @user.name.split.first %> is
+    <% end %>
+     auctions >
+  </h1>
+
+  <%= will_paginate @items, param_name: :items_page %>
+  <% unless @items.empty? %>
+    <% @items.each do |item| %>
+      <article>
+        <%= link_to image_tag(item.image_preview.url(:thumb)), item %>
+        <h2><%= link_to item.name, item %></h2>
+        <p><%= number_to_currency(find_highest_bid_for(item)) %></p>
+        <p><%= item.category.name %></p>
+        <p><%= time_to_natural_language(item.finish_time - Time.now) %> remaining<p>
+      </article>
+    <% end %>
+  <% else %>
+    <p>No items</p>
+  <% end %>
+</div>
+

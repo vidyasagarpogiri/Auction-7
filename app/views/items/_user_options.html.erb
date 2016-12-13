@@ -1,0 +1,7 @@
+<div class="user-settings">
+  <p class="title">User Panel</p>
+  <% if @item.bids.count == 0 %>
+    <p><%= link_to 'Edit Auction', edit_item_path(@item) %></p>
+  <% end %>
+  <p class="delete-account"><%= link_to 'Delete Auction', @item, method: :delete, data: { confirm: 'The auction will be permanently be deleted. Are you sure you want to delete?' } %></p>
+</div>

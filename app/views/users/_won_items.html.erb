@@ -1,0 +1,29 @@
+<h2> Auctions You have won ></h2>
+<% unless @won_items.empty? %>
+<div class="table-box">
+<table class="won-items">
+  <%= will_paginate @won_items, param_name: :won_page,
+                                previous_label: "<<",
+                                next_label:     ">>", 
+                                inner_window:   1, 
+                                outer_window:   0 %>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @won_items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name, item %></td>
+        <td><%= number_to_currency find_highest_bid_for(item) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% else %>
+<p class="rule">No items</p>
+<% end %>

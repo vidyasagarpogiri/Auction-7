@@ -1,0 +1,15 @@
+<%= content_tag(:p, notice, id: "notice") unless notice.nil? %>
+
+<%= render 'item_details' %>
+
+<aside id="item-sidebar">
+  <% if signed_in? && @item.user_id == current_user.id %>
+    <%= render 'user_options' %>
+  <% end %>
+  <% if signed_in? && current_user.id != @item.user_id && !item_expired?(@item) %>
+    <%= render 'bids/form' %>
+  <% end %>
+  <%= render 'bids/index' %>
+
+</aside>
+<p class="clear"></p>

@@ -1,0 +1,25 @@
+<%= content_tag(:p, notice, id: "notice") unless notice.nil? %>
+
+<aside id="profile-panel">
+  <h1 class="user-title">
+    <!--<%= gravatar_for @user %><br>-->
+    <%= @user.name %>
+  </h1>
+
+  <% if signed_in? && @user.id == current_user.id %>
+  <div class="user-settings">
+    <p class="title">Update User Info.</p>
+    <p class="delete-account"><%= link_to "Delete Account", @user, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <p class="edit-account"><%= link_to "Edit Account", edit_user_path %></p>
+    <p class="list-item"><%= link_to "New Auction", new_item_path %></p>
+  </div>
+  <% end %>
+
+  <% if @user.id == current_user.id %>
+    <%= render 'bidding_items' %>
+    <%= render 'won_items' %>
+  <% end %>
+</aside>
+
+<%= render 'listed_items' %>
+<p class="clear"></p>

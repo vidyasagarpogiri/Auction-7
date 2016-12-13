@@ -1,0 +1,30 @@
+<h2>You have bid on ></h2>
+<% unless @bids.empty? %>
+<div class="table-box">
+<%= will_paginate @bids, param_name: :bids_page, 
+                         previous_label: "<<",
+                         next_label:     ">>", 
+                         inner_window:   1, 
+                         outer_window:   0 %>
+                         
+<table class="bidding-items">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Bids</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @bids.each do |bid| %>
+      <tr>
+        <td><%= link_to bid.item.name, bid.item %></td>
+        <td><%= bid.item.bids.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+<% else %>
+  <p class="rule">No items</p>
+<% end %>

@@ -1,0 +1,6 @@
+# Load the Rails application.
+require File.expand_path('../application', __FILE__)
+
+# Initialize the Rails application.
+AuctionApp::Application.initialize!
+Rails.application.config.assets.precompile += %w( home.css )
